@@ -1,0 +1,46 @@
+function onOpen() {
+  var ui = SpreadsheetApp.getUi();
+  ui.createMenu('Custom Numbers API Menu')
+      .addItem('Display random number fact','callNumbers')
+      .addToUi();
+}
+
+function callNumbers() {
+  
+  // Call the Numbers API for random math fact
+  var response = UrlFetchApp.fetch("http://numbersapi.com/random/math");
+  /*
+  var response2 = UrlFetchApp.fetch("http://numbersapi.com/random/trivia");
+  var response3 = UrlFetchApp.fetch("http://numbersapi.com/4/17/date");
+  var response4 = UrlFetchApp.fetch("http://numbersapi.com/1729");
+  */
+  //log the response of the API call for the random math fact
+  Logger.log(response.getContentText());
+  
+  /*
+  Logger.log(response2.getContentText());
+  Logger.log(response3.getContentText());
+  Logger.log(response4.getContentText());
+  */
+  // set variable equal to the response
+  var fact = response.getContentText();
+  
+  /*
+  var fact2 = response2.getContentText();
+  var fact3 = response3.getContentText();
+  var fact4 = response4.getContentText();
+  */
+  //set focus to the spreadsheet
+  var sheet = SpreadsheetApp.getActiveSheet();
+  //sheet.getRange(1,1).setValue([fact]);
+  
+  //sheet.getRange(2,1).setValue([fact2]);
+  //sheet.getRange(3,1).setValue([fact3]);
+  //sheet.getRange(4,1).setValue([fact4]);
+  
+  //write the fact to the 1st blank row
+  sheet.getRange(sheet.getLastRow() + 1,1).setValue([fact]);
+
+  
+}
+
